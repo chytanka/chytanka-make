@@ -1,0 +1,46 @@
+fieldset {
+    border-radius: 1ch;
+    padding: 2.56ch;
+
+    legend {
+        padding: 1ch;
+    }
+
+    label {
+        display: grid;
+        span {
+            opacity: .8;
+        }
+
+        input {
+            border-radius: .8ch;
+            padding: .8ch;
+
+            opacity: .8;
+        }
+    }
+
+   
+}
+
+input {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    gap: 1ch;
+    overflow-x: auto;
+    padding: 0 0 1ch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+
+    fieldset {
+        padding: 1ch;
+        flex: 0 0 80%;
+        scroll-snap-align: center;
+        width: 80%;
+        border-style: dashed;
+        border-color: #8888;
+    }
+}

@@ -1,0 +1,8 @@
+<button class="button large" (click)="openFileDialog()" title="Add Files">➕</button>
+
+@if(showDragAndDropZone){
+<div class="drop-zone" (click)="showDragAndDropZone = false" (drop)="dropHandler($event)">
+    <span>📃</span>
+    <p>Drop it</p>
+</div>
+}

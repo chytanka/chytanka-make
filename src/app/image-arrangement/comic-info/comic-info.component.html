@@ -1,0 +1,49 @@
+<form [formGroup]="comicInfoForm" >
+  <!-- <button class="button small" type="reset">Reset</button> -->
+  <div style="display: grid;">
+    <div class="flex">
+      <fieldset formGroupName="general" [disabled]="disabled()">
+        <legend>Загальна інформація</legend>
+        <label><span>Title: </span><input formControlName="title" /></label>
+        <label><span>Series:</span> <input formControlName="series" /></label>
+        <label><span>Number:</span> <input formControlName="number" /></label>
+        <label><span>Volume:</span> <input formControlName="volume" /></label>
+        <label><span>Summary:</span> <input formControlName="summary" /></label>
+        
+      </fieldset>
+  
+      <fieldset formGroupName="creators" [disabled]="disabled()">
+        <legend>Творці</legend>
+        <label><span>Writer:</span> <input formControlName="writer" /></label>
+        <label><span>Penciller: </span><input formControlName="penciller" /></label>
+        <label><span>Inker:</span> <input formControlName="inker" /></label>
+        <label><span>Colorist:</span> <input formControlName="colorist" /></label>
+        <label><span>Cover Artist:</span> <input formControlName="coverArtist" /></label>
+      </fieldset>
+  
+      <fieldset formGroupName="publication" [disabled]="disabled()">
+        <legend>Інформація про публікацію</legend>
+        <label><span>Publisher: </span><input formControlName="publisher" /></label>
+        <label><span>Year:</span> <input formControlName="year" type="number" /></label>
+        <label><span>Month:</span> <input formControlName="month" type="number" /></label>
+        <label><span>Day: </span><input formControlName="day" type="number" /></label>
+      </fieldset>
+  
+      <fieldset formGroupName="technical" [disabled]="disabled()">
+        <legend>Технічна інформація</legend>
+        <label><span>Page Count: </span><input formControlName="pageCount" type="number" /></label>
+        <label><span>Language ISO:</span> <input formControlName="languageISO" /></label>
+        <label><span>Manga:</span> <input formControlName="manga" [value]="manga()" /></label>
+      </fieldset>
+  
+      <fieldset formGroupName="additional" [disabled]="disabled()">
+        <legend>Додаткова інформація</legend>
+        <label><span>Characters:</span> <input formControlName="characters" /></label>
+        <label><span>Teams:</span> <input formControlName="teams" /></label>
+        <label><span>Locations:</span> <input formControlName="locations" /></label>
+        <label><span>Story Arc:</span> <input formControlName="storyArc" /></label>
+        <label><span>Scan Information:</span> <input formControlName="scanInformation" /></label>
+      </fieldset>
+    </div>
+  </div>
+</form>
