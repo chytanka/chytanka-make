@@ -39,12 +39,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "jszip",
+              "sort-predicate",
+              "crypto-js"
+            ],
             "outputPath": "dist/chytanka-make",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-             
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -105,9 +108,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-             
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
