@@ -1,0 +1,28 @@
+<div style="padding: 2ch 1ch;" class="image-list" [dir]="dir()" cdkDropList
+    (cdkDropListDropped)="imgArrService.moveImage($event)" cdkDropListOrientation="mixed">
+    <div class="image-item" style="cursor: unset; ">
+        <div class="direction-page">
+            <button class="button large" (click)="onToggleDir()">
+                Read direction <br>
+                {{dir() =="ltr" ? "Left to right ➡️":"Right to left ⬅️"}}</button>
+        </div>
+    </div>
+
+    @for (img of imgArrService.imageList(); track $index) {
+    <figure cdkDrag [cdkDragDisabled]="!isMoveable()" class="image-item">
+        <img loading="lazy" [src]="img.src" [alt]="img.name | truncate" [title]="img.sha256" />
+        <figcaption dir="ltr">
+            <span class="title-item">{{img.name | truncate}}</span>
+            <button class="delete-item-btn button delete small"
+                (click)="imgArrService.removeImage(img.sha256)">🗑️</button>
+            <button class="split-item-btn button small" (click)="imgArrService.split($index, dir())">Split</button>
+        </figcaption>
+    </figure>
+    }
+
+    <div class="image-item" style="cursor: unset;  ">
+        <div class="add-page">
+            @if(isBrowser){<app-file-change title="Add pages (Ctrl+O)" />}
+        </div>
+    </div>
+</div>

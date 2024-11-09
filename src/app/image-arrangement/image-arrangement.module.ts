@@ -7,13 +7,15 @@ import { ComicInfoComponent } from './comic-info/comic-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FileChangeComponent } from './file-change/file-change.component';
 import { TruncatePipe } from '../shared/truncate.pipe';
+import { ImgArrangeListComponent } from './ui/img-arrange-list/img-arrange-list.component';
 
 
 @NgModule({
   declarations: [
     ImageArrangementComponent,
     ComicInfoComponent,
-    FileChangeComponent
+    FileChangeComponent,
+    ImgArrangeListComponent
   ],
   imports: [
     CommonModule,

@@ -21,9 +21,9 @@ export class ImageArrangementComponent {
   imgArrService = inject(ImageArrangementService)
   comicInfo = inject(ComicInfoService);
   fs = inject(FileService)
-  platformId = inject(PLATFORM_ID);
   fHash = inject(FileHashService)
-
+  
+  platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId)
   minImageSize = signal(176)
 
