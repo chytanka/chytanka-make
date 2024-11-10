@@ -11,8 +11,6 @@ export class ComicInfoService {
   private readonly storageKey = 'comicInfo';
   comicInfoSignal = signal<ComicInfo>(this.loadFromSessionStorage());
 
-
-
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       effect(() => {
@@ -34,8 +32,8 @@ export class ComicInfoService {
   }
 
   private loadFromSessionStorage(): ComicInfo {
-
     const data = (isPlatformBrowser(this.platformId)) ? sessionStorage.getItem(this.storageKey) : undefined;
+
     return data
       ? JSON.parse(data)
       : {
@@ -72,15 +70,6 @@ export class ComicInfoService {
       };
   }
 
-  // comicInfoXml = computed(() => `
-  // <ComicInfo>
-  //   <Title>${this.title()}</Title>
-  //   <Author>${this.author()}</Author>
-  //   <Publisher>${this.publisher()}</Publisher>
-  //   <Language>${this.language()}</Language>
-  // </ComicInfo>`);
-
-
   generateComicInfoXml(comicInfo: ComicInfo): string {
     const doc = document.implementation.createDocument('', '', null);
     const comicInfoElement = doc.createElement('ComicInfo');
@@ -109,11 +98,17 @@ export class ComicInfoService {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  genFileName(): any {
-    const title = this.comicInfoSignal().general.title;
+  genFileName(): string {
+    const { title, volume } = this.comicInfoSignal().general;
+    const { languageISO } = this.comicInfoSignal().technical;
     const str = title !== "" ? title : "chytanka";
+    const nameParts = [
+      slugify(str),
+      volume ? `vol${volume}` : "",
+      languageISO
+    ].filter(v => v.length > 0)
 
-    return slugify(str);
+    return nameParts.join('-');
   }
 
 }

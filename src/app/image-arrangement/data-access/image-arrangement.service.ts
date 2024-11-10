@@ -13,6 +13,14 @@ import {
 } from '../commands';
 import { ComicInfoService } from './comic-info.service';
 
+async function fetchBlobFromUrl(blobUrl: string) {
+  const response = await fetch(blobUrl);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch blob: ${response.statusText}`);
+  }
+  return await response.blob();
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,32 +63,29 @@ export class ImageArrangementService {
     return this.imageList().find(image => image.sha256 === sha256);
   }
 
-  downloadZip() {
+  async downloadZip() {
     const zip = new JSZip();
 
     const xml = this.comicInfo.generateComicInfoXml(this.comicInfo.comicInfoSignal());
 
     zip.file('ComicInfo.xml', xml);
 
-    this.imageList().forEach((image, index) => {
+    for (let index = 0; index < this.imageList().length; index++) {
+      const image = this.imageList()[index];
       const paddedIndex = String(index + 1).padStart(Math.max(3, this.imageList.length), '0');
-      const newName = `image_${paddedIndex}_${image.name}`;
+      const newName = `${paddedIndex}.${image.name.split('.').pop()}`;
+      const blob = await fetchBlobFromUrl(image.src)
 
-      fetch(image.src)
-        .then(res => res.blob())
-        .then(blob => {
-          zip.file(newName, blob);
+      zip.file(newName, blob);
+    }
 
-          if (index === this.imageList().length - 1) {
-            zip.generateAsync({ type: 'blob' }).then((content: any) => {
-              const link = document.createElement('a');
-              link.href = URL.createObjectURL(content);
-              link.download = this.comicInfo.genFileName() + '.cbz';
-              link.click();
-            });
-          }
-        });
+    zip.generateAsync({ type: 'blob' }).then((content: any) => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(content);
+      link.download = this.comicInfo.genFileName() + '.cbz';
+      link.click();
     });
+    
   }
 
 }
