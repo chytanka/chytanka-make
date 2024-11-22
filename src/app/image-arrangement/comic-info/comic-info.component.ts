@@ -3,9 +3,10 @@ import { ComicInfoService } from '../data-access';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-comic-info',
-  templateUrl: './comic-info.component.html',
-  styleUrl: './comic-info.component.scss'
+    selector: 'app-comic-info',
+    templateUrl: './comic-info.component.html',
+    styleUrl: './comic-info.component.scss',
+    standalone: false
 })
 export class ComicInfoComponent implements OnInit {
   disabled = input<boolean>(false)

@@ -3,9 +3,10 @@ import { FileService } from '../data-access/file.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-file-change',
-  templateUrl: './file-change.component.html',
-  styleUrl: './file-change.component.scss'
+    selector: 'app-file-change',
+    templateUrl: './file-change.component.html',
+    styleUrl: './file-change.component.scss',
+    standalone: false
 })
 export class FileChangeComponent implements OnInit {
   ngOnInit(): void {

@@ -7,12 +7,13 @@ import { FileService } from '../data-access/file.service';
 
 
 @Component({
-  selector: 'app-image-arrangement',
-  templateUrl: './image-arrangement.component.html',
-  styleUrl: './image-arrangement.component.scss',
-  host: {
-    '[style.--min-image-size]': 'minImageSize()+"px"'
-  },
+    selector: 'app-image-arrangement',
+    templateUrl: './image-arrangement.component.html',
+    styleUrl: './image-arrangement.component.scss',
+    host: {
+        '[style.--min-image-size]': 'minImageSize()+"px"'
+    },
+    standalone: false
 })
 export class ImageArrangementComponent {
 
