@@ -11,11 +11,12 @@
 aside {
     background-color: var(--surface2);
     height: 100vh;
-
-    display: grid;
-    grid-template-rows: auto 1fr auto auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
     position: sticky;
     top: 0;
+    padding: 1ch;
 
     footer {
         display: grid;
@@ -55,4 +56,61 @@ footer {
     flex-wrap: wrap;
     gap: 1ch;
     align-items: center;
+}
+
+summary h4 {
+    margin: 0;
+}
+
+details {
+    padding: 1.5ch 2ch;
+    border-radius: .5ch;
+    // border: 2px solid rgb(0, 40, 64);
+    transition: all var(--t) ease-in-out;
+    box-shadow: var(--flat-shadow-medium);
+
+    summary {
+        cursor: pointer;
+        font-weight: bold;
+        transition: color var(--t) cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+
+    &[open] {
+        // border-color: #166496;
+        background-color: #103651;
+
+        @media (prefers-color-scheme: light) {
+            background-color: #fff897;
+        }
+
+        & {
+            box-shadow: var(--flat-shadow-medium);
+        }
+
+        summary {
+            color: #caa902;
+            border-bottom: 2px solid var(--shc);
+            padding-bottom: 1ch;
+
+            @media (prefers-color-scheme: light) {
+                color: #166496;
+            }
+        }
+    }
+
+}
+
+@supports (height: calc-size(auto)) {
+    details::details-content {
+        display: block;
+        height: 0;
+        overflow: hidden;
+        transition: height var(--t), content-visibility var(--t);
+        transition-behavior: allow-discrete;
+    }
+
+    details[open]::details-content {
+        height: calc-size(auto);
+        transition: height var(--t), content-visibility var(--t);
+    }
 }

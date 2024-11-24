@@ -1,15 +1,15 @@
 <section>
 
     <div>
-        <app-img-arrange-list [isMoveable]="isMoveable" [dir]="dir()" (toggleDir)="toggleDir()"/>
-        <div style="text-align: center; padding: 1ch;"><small>Chytanka Make v0.0.2</small></div>
+        <app-img-arrange-list [isMoveable]="isMoveable" [dir]="dir()" (toggleDir)="toggleDir()" />
+        <div style="text-align: center; padding: 1ch;"><small>Chytanka Make v{{v}}</small></div>
     </div>
     <footer>
-        
+
         <button [disabled]="imgArrService.imageList().length==0" class="button small"
             (click)="imgArrService.sortByName()">Auto Sort</button>
-            <label for="isMoveable">Moveable</label>
-            <input type="checkbox" [(ngModel)]="isMoveable" id="isMoveable">
+        <label for="isMoveable">Moveable</label>
+        <input type="checkbox" [(ngModel)]="isMoveable" id="isMoveable">
         <small>{{imgArrService.imageList().length}} Pages</small>
         <input style="margin-left: auto;" type="range" #range [min]="128" [max]="256" [step]="1"
             [value]="minImageSize()" (input)="setMinSize($event)">
@@ -18,16 +18,20 @@
 </section>
 
 <aside>
-    <div style="padding: 1ch;display: flex; flex-direction: column; height: 100%; overflow: auto;">
-        <h4>History
 
-            <div class="buttons-bar">
-                <button [disabled]="imgArrService.cm.history.length == 0" class="button small" (click)="imgArrService.undo()" title="Undo (Ctrl+Z)">↩️</button>
-                <button [disabled]="imgArrService.cm.undoneCommands.length == 0" class="button small" (click)="imgArrService.redo()" title="Redo (Ctrl+Shift+Z)">↪️</button>
-            </div>
-        </h4>
+    <details>
+        <summary>
+            <h4 style="display: inline-block;">History
+                <div class="buttons-bar">
+                    <button [disabled]="imgArrService.cm.history.length == 0" class="button small"
+                        (click)="imgArrService.undo()" title="Undo (Ctrl+Z)">↩️</button>
+                    <button [disabled]="imgArrService.cm.undoneCommands.length == 0" class="button small"
+                        (click)="imgArrService.redo()" title="Redo (Ctrl+Shift+Z)">↪️</button>
+                </div>
+            </h4>
+        </summary>
         <div
-            style="overflow-y: auto; flex-grow: 1; min-height: 100px; font-family: 'Courier New', Courier, monospace; display: flex; flex-wrap: wrap; gap: 1ch; align-items: start; align-content: baseline;">
+            style="overflow-y: auto; flex-grow: 1; min-height: 100px; font-family: 'Courier New', Courier, monospace; display: flex; flex-wrap: wrap; gap: 1ch; align-items: start; align-content: baseline;max-height: 40vh;">
             @for (h of imgArrService.cm.history; track $index) {
             <small (click)="undo($index)" style="border: 1px dashed; padding: .5ch; border-radius: .5ch;">{{h}}</small>
             } @for (h of imgArrService.cm.undoneCommands.reverse(); track $index) {
@@ -35,13 +39,16 @@
             }
 
         </div>
-    </div>
+    </details>
 
-    <div style="padding: 1ch; display: flex; flex-direction: column; height: 100%; overflow: auto;">
-        <h4>Comic Info</h4>
 
-        <app-comic-info [manga]="(dir() =='ltr') ?'No':'Yes'" [disabled]="imgArrService.imageList().length==0" />
-    </div>
+    <details open>
+        <summary>
+            <h4 style="display: inline-block;">Comic Info</h4>
+        </summary><app-comic-info [manga]="(dir() =='ltr') ?'No':'Yes'"
+            [disabled]="imgArrService.imageList().length==0" />
+    </details>
+
 
     <footer>
         <button [disabled]="imgArrService.imageList().length==0" class="button large primary"

@@ -4,6 +4,7 @@ import { FileHashService } from '../../shared/file-hash.service';
 import { ImageArrangementService, ComicInfoService } from '../data-access';
 import { isPlatformBrowser } from '@angular/common';
 import { FileService } from '../data-access/file.service';
+import { environment } from '../../../environments/environment.development';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { FileService } from '../data-access/file.service';
     standalone: false
 })
 export class ImageArrangementComponent {
-
+  v = environment.version
   isMoveable: boolean = true;
 
   imgArrService = inject(ImageArrangementService)
